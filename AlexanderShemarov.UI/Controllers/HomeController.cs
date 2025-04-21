@@ -2,6 +2,7 @@ using AlexanderShemarov.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+
 namespace AlexanderShemarov.UI.Controllers
 {
     public class HomeController : Controller
