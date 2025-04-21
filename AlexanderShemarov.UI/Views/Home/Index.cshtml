@@ -1,0 +1,128 @@
+﻿@model IEnumerable<string>
+@{
+    //Layout = null;// This row sets if Index.cshtml will be connected to _Layout.cshtml or another specific layout-file
+    // If not, Index.cshtml must have its own <link /> and <script /> tags for bootstrap
+}
+
+<header>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <!-- меню сайта -->
+            <a class="navbar-brand" href="#">AlexanderShemarov.UI</a>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Лб 1</a>
+                <a class="nav-item nav-link" href="#">Каталог</a>
+                <a class="nav-item nav-link" href="#">Администрирование</a>
+            </div>
+            <!-- меню сайта - конец -->
+            <!-- Информация пользователя -->
+            <a href="#" class="navbar-text ms-auto">
+                0.00 руб <i class="bi bi-cart"></i> (0)
+            </a>
+            <div class="dropdown ms-4 nav-color">
+                <button class="btn btn-secondary dropdown-toggle"
+                        type="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    User@gmail.com
+                    <img src="~/images/tempUserImage.png" width="30"
+                         alt="User" class="rounded nav-color" asp-append-version="true" />
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li>
+                        <span class="dropdown-item-text">
+                            <img src="~/images/tempUserImage.png"
+                                 width="50" alt="User" class="rounded" asp-append-version="true" />
+                            user@gmail.com
+                        </span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form id="logoutForm" class="form-inline" action="#">
+                            <button id="logout" type="submit" class="nav-link
+btn btn-link text-dark">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <!-- Информация пользователя - конец -->
+        </nav> <!-- Панель навигации - конец -->
+    </div><!-- container - конец -->
+</header><!-- header - конец -->
+
+<main class="container">
+    <h1>Лабораторная работа №1</h1>
+    <h3>Список</h3>
+    <ol class="list-group" type="A">
+        @foreach (string str in Model)
+        {
+            <li>@str</li>
+        }
+    </ol>
+    <hr />
+    <h3>Форма</h3>
+    <form method="post">
+        <div class="form-check my-3">
+            <input class="form-check-input me-1" type="checkbox" value="CheckBox1" id="firstCheckbox" name="CheckBox">
+            <label class="form-check-label" for="firstCheckbox">Чек-бокс 1</label>
+        </div>
+        <div class="form-check my-3">
+            <input class="form-check-input me-1" type="checkbox" value="CheckBox2" id="secondCheckbox" name="CheckBox">
+            <label class="form-check-label" for="secondCheckbox">Чек-бокс 2</label>
+        </div>
+
+        <div class="container d-flex flex-row justify-content-start align-content-center">
+            <div class="form-check mx-2">
+                <input class="form-check-input me-1" type="radio" name="radios" value="Radio1" id="firstRadio" checked>
+                <label class="form-check-label" for="firstRadio">Радио-1</label>
+            </div>
+            <div class="form-check mx-2">
+                <input class="form-check-input me-1" type="radio" name="radios" value="Radio2" id="secondRadio">
+                <label class="form-check-label" for="secondRadio">Радио-2</label>
+            </div>
+            <div class="form-check mx-2">
+                <input class="form-check-input me-1" type="radio" name="radios" value="Radio3" id="secondRadio">
+                <label class="form-check-label" for="secondRadio">Радио-3</label>
+            </div>
+        </div>
+
+        <div class="mt-3 row">
+            <label for="login" class="col-sm-2 col-form-label">Логин:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="login" name="userLogin">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="password" class="col-sm-2 col-form-label">Пароль:</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" name="userPass">
+            </div>
+        </div>
+
+        <div class="col-12 my-1">
+            <button class="btn btn-primary" type="submit">Отправить</button>
+        </div>
+    </form>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="navbar navbar-dark navbar-expand-md bg-dark">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-item nav-link" href="http://www.facebook.com">
+                    <i class="bi bi-facebook fs-3"></i>
+                </a>
+                <a class="nav-item nav-link" href="http://www.x.com">
+                    <i class="bi bi-twitter-x fs-3"></i>
+                </a>
+                <a class="nav-item nav-link" href="http://www.youtube.com">
+                    <i class="bi bi-youtube fs-3"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
