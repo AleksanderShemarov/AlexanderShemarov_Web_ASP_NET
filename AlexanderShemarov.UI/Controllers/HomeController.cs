@@ -1,5 +1,6 @@
 using AlexanderShemarov.UI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 
 
@@ -9,6 +10,7 @@ namespace AlexanderShemarov.UI.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         public List<string> listElems;
+        private readonly List<ListDemo> _SelectList;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -20,12 +22,23 @@ namespace AlexanderShemarov.UI.Controllers
                 "элемент списка с индексом 4",
             ];
 
+            _SelectList = [
+                new ListDemo { Id = 1, Name = "Item 1" },
+                new ListDemo { Id = 2, Name = "Item 2" },
+                new ListDemo { Id = 3, Name = "Item 3" },
+            ];
+
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View(listElems);
+            ViewData["text"] = "Лабораторная работа №2";
+            ViewData["list"] = listElems;
+            //ViewData["select"] = _SelectList;
+
+            SelectList selectData = new SelectList(_SelectList, "Id", "Name");
+            return View(selectData);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

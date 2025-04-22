@@ -1,0 +1,27 @@
+﻿@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var action = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+    var area = ViewContext.RouteData.Values["area"]?.ToString() ?? "";
+
+    // Main Page Checking ("/" or "/Home/Index")
+    bool isHome = string.IsNullOrEmpty(controller) && string.IsNullOrEmpty(action)
+        || controller.Equals("Home", StringComparison.OrdinalIgnoreCase) && action.Equals("Index", StringComparison.OrdinalIgnoreCase);
+}
+
+
+<!--Website Menu-->
+<a class="navbar-brand" asp-controller="Home" asp-action="Index">
+    AlexanderShemarov.UI
+</a>
+<div class="navbar-nav">
+    <a class="nav-item nav-link @(isHome ? "active" : "")" asp-controller="Home" asp-action="Index">
+        Лб 1
+    </a>
+    <a class="nav-item nav-link @(controller.Equals("Product", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-controller="Product" asp-action="Index">
+        Каталог
+    </a>
+    <a class="nav-item nav-link @(area.Equals("Admin", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-area="Admin" asp-page="/Index">
+        Администрирование
+    </a>
+</div>
+<!---->
