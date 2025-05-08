@@ -1,8 +1,50 @@
-﻿@{
+﻿@using System.Security.Claims;
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <!--User's Info-->
+    @await Component.InvokeAsync("Cart");
+
+    <div class="dropdown ms-4 nav-color">
+        <button class="btn btn-secondary dropdown-toggle"
+                type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+            @User.Identity.Name
+            <img src="~/images/tempUserImage.png" width="30" alt="User" class="rounded nav-color" asp-append-version="true" />
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+                <span class="dropdown-item-text">
+                    <img src="~/images/tempUserImage.png" width="50" alt="User" class="rounded" asp-append-version="true" />
+                    @User.Identity.Name
+                </span>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li>
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnurl="/">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">
+                        Logout
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    <!---->
+}
+else
+{
+    <div class="navbar-nav ms-auto">
+        <a class="nav-link navbar-text" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="nav-link navbar-text" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </div>
 }
 
 
-<!--User's Info-->
+@* <!--User's Info-->
 @await Component.InvokeAsync("Cart");
 
 <div class="dropdown ms-4 nav-color">
@@ -10,16 +52,14 @@
             type="button" id="dropdownMenuButton"
             data-bs-toggle="dropdown"
             aria-expanded="false">
-        User@gmail.com
-        <img src="~/images/tempUserImage.png" width="30"
-             alt="User" class="rounded nav-color" asp-append-version="true" />
+        @User.Identity.Name
+        <img src="~/images/tempUserImage.png" width="30" alt="User" class="rounded nav-color" asp-append-version="true" />
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li>
             <span class="dropdown-item-text">
-                <img src="~/images/tempUserImage.png"
-                     width="50" alt="User" class="rounded" asp-append-version="true" />
-                user@gmail.com
+                <img src="~/images/tempUserImage.png" width="50" alt="User" class="rounded" asp-append-version="true" />
+                @User.Identity.Name
             </span>
         </li>
         <li>
@@ -34,4 +74,4 @@
         </li>
     </ul>
 </div>
-<!---->
+<!----> *@

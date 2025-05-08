@@ -33,7 +33,7 @@ namespace AlexanderShemarov.UI.Controllers
 
         public IActionResult Index()
         {
-            ViewData["text"] = "Лабораторная работа №2";
+            ViewData["text"] = "Лабораторная работа №3";
             ViewData["list"] = listElems;
             //ViewData["select"] = _SelectList;
 

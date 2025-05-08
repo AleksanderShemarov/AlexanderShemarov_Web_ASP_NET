@@ -10,79 +10,77 @@
 }
 
 
-<main class="container">
-    <h1>@labwork</h1>
-    <h3>Список</h3>
-    <ol class="list-group ms-5" type="A">
-        @foreach (var str in listElems)
-        {
-            <li>@str</li>
-        }
-    </ol>
+<h1>@labwork</h1>
+<h3>Список</h3>
+<ol class="list-group ms-5" type="A">
+    @foreach (var str in listElems)
+    {
+        <li>@str</li>
+    }
+</ol>
 
-    <hr />
+<hr />
 
-    <h3>Форма</h3>
-    <form method="post">
+<h3>Форма</h3>
+<form method="post">
 
-        @* <!--<select> for data from ViewData object-->
-        <div class="col-sm-10 offset-sm-2 my-2">
-            <select class="form-select" name="selectOptionViewData">
-                @foreach(var selected in select)
-                {
-                    <option selected="@(selected.Id == 1)" value="@selected.Id">@selected.Name</option>
-                }
-            </select>
-        </div> *@
+    @* <!--<select> for data from ViewData object-->
+    <div class="col-sm-10 offset-sm-2 my-2">
+        <select class="form-select" name="selectOptionViewData">
+            @foreach(var selected in select)
+            {
+                <option selected="@(selected.Id == 1)" value="@selected.Id">@selected.Name</option>
+            }
+        </select>
+    </div> *@
 
-        <!--<select> for data from Model-->
-        <div class="col-sm-10 offset-sm-2 my-2">
-            <select class="form-select" name="selectOption" asp-items="Model"></select>
+    <!--<select> for data from Model-->
+    <div class="col-sm-10 offset-sm-2 my-2">
+        <select class="form-select" name="selectOption" asp-items="Model"></select>
+    </div>
+
+    <div class="col-sm-10 offset-sm-2 my-2">
+        <div class="form-check">
+            <input class="form-check-input me-1" type="checkbox" value="CheckBox1" id="firstCheckbox" name="CheckBox">
+            <label class="form-check-label" for="firstCheckbox">Чек-бокс 1</label>
         </div>
-
-        <div class="col-sm-10 offset-sm-2 my-2">
-            <div class="form-check">
-                <input class="form-check-input me-1" type="checkbox" value="CheckBox1" id="firstCheckbox" name="CheckBox">
-                <label class="form-check-label" for="firstCheckbox">Чек-бокс 1</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input me-1" type="checkbox" value="CheckBox2" id="secondCheckbox" name="CheckBox">
-                <label class="form-check-label" for="secondCheckbox">Чек-бокс 2</label>
-            </div>
+        <div class="form-check">
+            <input class="form-check-input me-1" type="checkbox" value="CheckBox2" id="secondCheckbox" name="CheckBox">
+            <label class="form-check-label" for="secondCheckbox">Чек-бокс 2</label>
         </div>
+    </div>
 
-        <div class="col-sm-10 offset-sm-2">
-            <div class="container d-flex flex-row justify-content-start align-content-center ps-0">
-                <div class="form-check me-2">
-                    <input class="form-check-input" type="radio" name="radios" value="Radio1" id="firstRadio" checked>
-                    <label class="form-check-label" for="firstRadio">Радио-1</label>
-                </div>
-                <div class="form-check mx-2">
-                    <input class="form-check-input" type="radio" name="radios" value="Radio2" id="secondRadio">
-                    <label class="form-check-label" for="secondRadio">Радио-2</label>
-                </div>
-                <div class="form-check ms-2">
-                    <input class="form-check-input" type="radio" name="radios" value="Radio3" id="secondRadio">
-                    <label class="form-check-label" for="secondRadio">Радио-3</label>
-                </div>
+    <div class="col-sm-10 offset-sm-2">
+        <div class="container d-flex flex-row justify-content-start align-content-center ps-0">
+            <div class="form-check me-2">
+                <input class="form-check-input" type="radio" name="radios" value="Radio1" id="firstRadio" checked>
+                <label class="form-check-label" for="firstRadio">Радио-1</label>
+            </div>
+            <div class="form-check mx-2">
+                <input class="form-check-input" type="radio" name="radios" value="Radio2" id="secondRadio">
+                <label class="form-check-label" for="secondRadio">Радио-2</label>
+            </div>
+            <div class="form-check ms-2">
+                <input class="form-check-input" type="radio" name="radios" value="Radio3" id="secondRadio">
+                <label class="form-check-label" for="secondRadio">Радио-3</label>
             </div>
         </div>
+    </div>
 
-        <div class="mt-3 row">
-            <label for="login" class="col-sm-2 col-form-label">Логин:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="login" name="userLogin">
-            </div>
+    <div class="mt-3 row">
+        <label for="login" class="col-sm-2 col-form-label">Логин:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="login" name="userLogin">
         </div>
-        <div class="mb-3 row">
-            <label for="password" class="col-sm-2 col-form-label">Пароль:</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" name="userPass">
-            </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="password" class="col-sm-2 col-form-label">Пароль:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" name="userPass">
         </div>
+    </div>
 
-        <div class="col-12 my-1">
-            <button class="btn btn-primary" type="submit">Отправить</button>
-        </div>
-    </form>
-</main>
+    <div class="col-12 my-1">
+        <button class="btn btn-primary" type="submit">Отправить</button>
+    </div>
+</form>
