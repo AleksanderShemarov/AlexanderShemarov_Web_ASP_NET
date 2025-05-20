@@ -12,12 +12,12 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
             @User.Identity.Name
-            <img src="~/images/tempUserImage.png" width="30" alt="User" class="rounded nav-color" asp-append-version="true" />
+            <img src="@Url.Action("GetAvatar", "Image")" width="30" alt="User" class="rounded nav-color" asp-append-version="true" />
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
                 <span class="dropdown-item-text">
-                    <img src="~/images/tempUserImage.png" width="50" alt="User" class="rounded" asp-append-version="true" />
+                    <img src="@Url.Action("GetAvatar", "Image")" width="50" alt="User" class="rounded" asp-append-version="true" />
                     @User.Identity.Name
                 </span>
             </li>

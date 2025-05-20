@@ -1,4 +1,5 @@
 using AlexanderShemarov.UI.Data;
+using AlexanderShemarov.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,11 @@ builder.Services.AddAuthorization(opt =>
 });
 
 builder.Services.AddTransient<IEmailSender, NoOpEmailSender>();
+
+
+builder.Services.AddScoped<ITrainTypesService, MemoryTrainTypesService>();
+builder.Services.AddScoped<ITrainsService, MemoryTrainsService>();
+
 
 builder.Services.AddControllersWithViews();
 

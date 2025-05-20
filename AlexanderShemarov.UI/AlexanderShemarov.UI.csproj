@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\" />
+    <ProjectReference Include="..\AlexanderShemarov.Domain\AlexanderShemarov.Domain.csproj" />
   </ItemGroup>
 
 </Project>

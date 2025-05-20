@@ -1,0 +1,157 @@
+﻿@model IEnumerable<Trains>
+
+@{
+    ViewData["Title"] = "Index";
+    var request = ViewContext.HttpContext.Request;
+    var returnUrl = request.Path + request.QueryString.ToUriComponent();
+
+    var trainTypes = ViewData["trainTypes"] as IEnumerable<TrainTypes>;
+}
+
+<h2 class="m-3">Цягнікі</h2>
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+
+@* <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Speed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainTypesId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Speed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td> *@
+                @* @Html.DisplayFor(modelItem => item.Image) *@
+                @* <img src="@item.Image" height="100" width="130" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainTypesId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table> *@
+
+<div class="row">
+    <!--Dropdown Menu-->
+    <div class="col-2 border-2">
+        <ul class="nav ">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" 
+                   data-bs-toggle="dropdown" 
+                   href="#" 
+                   role="button" 
+                   aria-expanded="false"
+                >
+                    @ViewData["currentTrainType"]
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" 
+                           asp-controller="product" 
+                           asp-route-category=@null
+                        >All</a>
+                    </li>
+                    @foreach (var item in trainTypes)
+                    {
+                        <li>
+                            <a class="dropdown-item" 
+                                asp-controller="product"
+                                asp-route-trainType="@item.NormalizedName">
+                                @item.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li> 
+        </ul>
+    </div>
+    <!---->
+</div>
+
+@if (Model != null)
+{
+    <div class="card-group">
+        @foreach (var item in Model)
+        {
+            <div class="col-4 p-4">
+                <div class="card border-dark m-2 h-100">
+                    <img src="@item.Image" alt="@Html.DisplayFor(modelItem => item.Image)" height="250" />
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @item.Name
+                        </h5>
+                        <p class="card-text">
+                            @item.Description
+                        </p>
+                        <h5 class="text-center">
+                            <span class="barge bg-secondary text-light px-2">
+                                Хуткасць: @item.Speed км/г
+                            </span>
+                        </h5>
+                        <h5 class="text-center">
+                            <span class="barge bg-secondary text-light px-2">
+                                Кошт: $@item.Cost
+                            </span>
+                        </h5>
+                    </div>
+                     <div class="card-footer text-center"> 
+                        <a class="btn btn-outline-primary" asp-action="add"
+                            asp-controller="cart" 
+                            asp-route-id="@item.ID"
+                            asp-route-returnurl="@returnUrl"
+                        >
+                            Add to cart <i class="bi bi-cart"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<h2 class="text-warning">@ViewData["Error"]</h2>
