@@ -1,0 +1,37 @@
+﻿@model Trains
+@{
+    var request = ViewContext.HttpContext.Request;
+    var returnUrl = request.Path + request.QueryString.ToUriComponent();
+}
+
+<div class="col-4 p-4">
+    <div class="card border-dark m-2 h-100">
+        <img src="~/@Model.Image" alt="@Html.DisplayFor(modelItem => Model.Image)" height="250" />
+        <div class="card-body">
+            <h5 class="card-title">
+                @Model.Name
+            </h5>
+            <p class="card-text">
+                @Model.Description
+            </p>
+            <h5 class="text-center">
+                <span class="barge bg-secondary text-light px-2">
+                    Хуткасць: @Model.Speed км/г
+                </span>
+            </h5>
+            <h5 class="text-center">
+                <span class="barge bg-secondary text-light px-2">
+                    Кошт: $@Model.Cost
+                </span>
+            </h5>
+        </div>
+        <div class="card-footer text-center">
+            <a class="btn btn-outline-primary" asp-action="add"
+               asp-controller="cart"
+               asp-route-id="@Model.ID"
+               asp-route-returnurl="@returnUrl">
+                Add to cart <i class="bi bi-cart"></i>
+            </a>
+        </div>
+    </div>
+</div>

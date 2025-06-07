@@ -1,5 +1,7 @@
 ﻿using AlexanderShemarov.Domain.Entities;
 using AlexanderShemarov.Domain.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 
 namespace AlexanderShemarov.UI.Services
 {
@@ -7,11 +9,14 @@ namespace AlexanderShemarov.UI.Services
     {
         List<Trains> _trains;
         List<TrainTypes> _trainTypes;
+        private readonly IConfiguration _config;
 
-        public MemoryTrainsService(ITrainTypesService trainTypesService)
+        public string? this[string key] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public MemoryTrainsService([FromServices] IConfiguration config, ITrainTypesService trainTypesService)
         {
             _trainTypes = trainTypesService.GetTrainTypesListAsync().Result.Data;
-
+            _config = config;
             SetupData();
         }
         private void SetupData()
@@ -102,7 +107,18 @@ namespace AlexanderShemarov.UI.Services
             }
 
             var data = _trains.Where(train => trainTypesID == null || train.TrainTypesId.Equals(trainTypesID))?.ToList();
-            result.Data = new ListModel<Trains>() { Items = data };
+
+
+            int pageSize = _config.GetSection("ItemsPerPage").Get<int>();
+            int totalPages = (int)Math.Ceiling(data.Count / (double)pageSize);
+
+
+            result.Data = new ListModel<Trains>()
+            {
+                Items = data.Skip((pageNo - 1) * pageSize).Take(pageSize).ToList(),
+                CurrentPage = pageNo,
+                TotalPages = totalPages
+            };
 
             if (data.Count == 0)
             {

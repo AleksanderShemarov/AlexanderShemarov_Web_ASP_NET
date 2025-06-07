@@ -5,7 +5,9 @@ namespace AlexanderShemarov.UI.Controllers
 {
     public class ProductController(ITrainTypesService trainTypesService, ITrainsService trainsService) : Controller
     {
-        public async Task<IActionResult> Index(string? trainType)
+        [Route("Catalog")]
+        [Route("Catalog/{trainType}")]
+        public async Task<IActionResult> Index(string? trainType, int pageNo = 1)
         {
             var trainTypesResponse = await trainTypesService.GetTrainTypesListAsync();
 
@@ -19,9 +21,10 @@ namespace AlexanderShemarov.UI.Controllers
                 )?.Name;
             ViewData["currentTrainType"] = currentTrainType;
 
-            var trainsResponse = await trainsService.GetTrainsListAsync(trainType);
+            var trainsResponse = await trainsService.GetTrainsListAsync(trainType, pageNo);
             if (!trainsResponse.Success) ViewData["Error"] = trainsResponse.ErrorMessage;
-            return View(trainsResponse.Data.Items);
+            
+            return View(trainsResponse.Data);
         }
     }
 }

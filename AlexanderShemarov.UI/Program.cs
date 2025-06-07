@@ -35,6 +35,8 @@ builder.Services.AddTransient<IEmailSender, NoOpEmailSender>();
 builder.Services.AddScoped<ITrainTypesService, MemoryTrainTypesService>();
 builder.Services.AddScoped<ITrainsService, MemoryTrainsService>();
 
+builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.AddControllersWithViews();
 
