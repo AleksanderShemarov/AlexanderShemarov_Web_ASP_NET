@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderShemarov.UI", "AlexanderShemarov.UI\AlexanderShemarov.UI.csproj", "{C1A2A252-E4B7-4E13-8521-710091F73B36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexanderShemarov.Domain", "AlexanderShemarov.Domain\AlexanderShemarov.Domain.csproj", "{0CEF273D-F27A-478E-9F19-27A034714F9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexanderShemarov.Domain", "AlexanderShemarov.Domain\AlexanderShemarov.Domain.csproj", "{0CEF273D-F27A-478E-9F19-27A034714F9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexanderShemarov.API", "AlexanderShemarov.API\AlexanderShemarov.API.csproj", "{7ED5FA86-673A-4C9A-9D33-8C84A28FA58B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0CEF273D-F27A-478E-9F19-27A034714F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CEF273D-F27A-478E-9F19-27A034714F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CEF273D-F27A-478E-9F19-27A034714F9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ED5FA86-673A-4C9A-9D33-8C84A28FA58B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ED5FA86-673A-4C9A-9D33-8C84A28FA58B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ED5FA86-673A-4C9A-9D33-8C84A28FA58B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ED5FA86-673A-4C9A-9D33-8C84A28FA58B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
