@@ -1,0 +1,55 @@
+﻿@page
+@model AlexanderShemarov.UI.Areas.Admin.Pages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Trains</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Trains.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Trains.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Trains.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Trains.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Trains.Speed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Trains.Speed) км/г
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Trains.Cost)
+        </dt>
+        <dd class="col-sm-10">
+            $@Html.DisplayFor(model => model.Trains.Cost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Trains.Image)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Trains.Image)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Trains.TrainTypes)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TrainTypes.FirstOrDefault(tt => tt.ID == Model.Trains.TrainTypesId)?.Name
+        </dd>
+    </dl>
+</div>
+<div class="d-flex flex-row justify-content-center align-items-center gap-2">
+    <a asp-page="./Edit" asp-route-id="@Model.Trains.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

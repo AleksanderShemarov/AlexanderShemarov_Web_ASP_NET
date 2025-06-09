@@ -1,0 +1,61 @@
+﻿@page
+@model AlexanderShemarov.UI.Areas.Admin.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Trains</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Trains.Name" class="control-label"></label>
+                <input asp-for="Trains.Name" class="form-control" />
+                <span asp-validation-for="Trains.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trains.Description" class="control-label"></label>
+                <input asp-for="Trains.Description" class="form-control" />
+                <span asp-validation-for="Trains.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trains.Speed" class="control-label"></label>
+                <input asp-for="Trains.Speed" class="form-control" />
+                <span asp-validation-for="Trains.Speed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trains.Cost" class="control-label"></label>
+                <input asp-for="Trains.Cost" class="form-control" />
+                <span asp-validation-for="Trains.Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trains.TrainTypesId" class="control-label">Train's Types (Selecting List)</label>
+                <select asp-for="Trains.TrainTypesId" class ="form-control" asp-items="ViewBag.TrainTypesId"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Image" class="form-label">
+                    Image
+                </label>
+                <input asp-for="Image" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

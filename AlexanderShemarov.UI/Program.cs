@@ -35,11 +35,9 @@ builder.Services.AddTransient<IEmailSender, NoOpEmailSender>();
 //builder.Services.AddScoped<ITrainTypesService, MemoryTrainTypesService>();
 //builder.Services.AddScoped<ITrainsService, MemoryTrainsService>();
 
-//builder.Services.AddScoped<ITrainTypesService, APITrainTypesService>();
 builder.Services.AddHttpClient<ITrainTypesService, APITrainTypesService>(
     opt => opt.BaseAddress = new Uri("http://localhost:5002/api/TrainTypes/")
 );
-//builder.Services.AddScoped<ITrainsService, APITrainsService>();
 builder.Services.AddHttpClient<ITrainsService, APITrainsService>(
     opt => opt.BaseAddress = new Uri("http://localhost:5002/api/Trains/")
 );

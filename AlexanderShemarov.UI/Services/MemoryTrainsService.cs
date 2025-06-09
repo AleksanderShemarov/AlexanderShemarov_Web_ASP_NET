@@ -1,7 +1,7 @@
 ﻿using AlexanderShemarov.Domain.Entities;
 using AlexanderShemarov.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
+
 
 namespace AlexanderShemarov.UI.Services
 {
@@ -92,12 +92,6 @@ namespace AlexanderShemarov.UI.Services
         }
         public Task<ResponseData<ListModel<Trains>>> GetTrainsListAsync(string? trainTypesNormalizedName, int pageNo = 1)
         {
-            //var model = new ListModel<Trains>() { Items = _trains };
-            //var result = new ResponseData<ListModel<Trains>>()
-            //{
-            //    Data = model,
-            //};
-
             var result = new ResponseData<ListModel<Trains>>();
             int? trainTypesID = null;
 
@@ -134,7 +128,7 @@ namespace AlexanderShemarov.UI.Services
             throw new NotImplementedException();
         }
 
-        public Task DeleteTrainAsync(int id)
+        public Task<ResponseData<bool>> DeleteTrainAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -144,7 +138,7 @@ namespace AlexanderShemarov.UI.Services
             throw new NotImplementedException();
         }
 
-        public Task UpdateTrainAsync(int id, Trains train, IFormFile? formFile)
+        public Task<ResponseData<Trains>> UpdateTrainAsync(int id, Trains train, IFormFile? formFile)
         {
             throw new NotImplementedException();
         }

@@ -1,0 +1,76 @@
+﻿@page
+@model AlexanderShemarov.UI.Areas.Admin.Pages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Trains</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Trains.ID" />
+            <div class="form-group">
+                <label asp-for="Trains.Name" class="control-label"></label>
+                <input asp-for="Trains.Name" class="form-control" />
+                <span asp-validation-for="Trains.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trains.Description" class="control-label"></label>
+                <input asp-for="Trains.Description" class="form-control" />
+                <span asp-validation-for="Trains.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trains.Speed" class="control-label"></label>
+                <input asp-for="Trains.Speed" class="form-control" />
+                <span asp-validation-for="Trains.Speed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trains.Cost" class="control-label"></label>
+                <input asp-for="Trains.Cost" class="form-control" />
+                <span asp-validation-for="Trains.Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trains.Image" class="control-label"></label>
+                <input asp-for="Trains.Image" class="form-control" />
+                <span asp-validation-for="Trains.Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trains.TrainTypesId" class="control-label"></label>
+                <select asp-for="Trains.TrainTypesId" class="form-control" asp-items="Model.TrainTypes"></select>
+                <span asp-validation-for="Trains.TrainTypesId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Current Image</label>
+                @if (!string.IsNullOrEmpty(Model.Trains.Image))
+                {
+                    var imageUrl = Model.Trains.Image?.StartsWith("/images/") == true
+                    ? "https://localhost:7002" + Model.Trains.Image
+                    : Model.Trains.Image;
+                    
+                    <img src="@imageUrl" class="img-thumbnail mb-2" style="max-height: 200px" />
+                }
+                else
+                {
+                    <p>No image</p>
+                }
+            </div>
+
+            <div class="form-group">
+                <label>New Image</label>
+                <input type="file" asp-for="NewImage" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

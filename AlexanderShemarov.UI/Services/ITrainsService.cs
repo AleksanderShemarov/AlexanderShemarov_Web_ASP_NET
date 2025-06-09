@@ -1,6 +1,7 @@
 ﻿using AlexanderShemarov.Domain.Entities;
 using AlexanderShemarov.Domain.Models;
 
+
 namespace AlexanderShemarov.UI.Services
 {
     public interface ITrainsService
@@ -27,14 +28,14 @@ namespace AlexanderShemarov.UI.Services
         /// <param name="train">object with new parameters</param> 
         /// <param name="formFile">image file</param> 
         /// <returns></returns> 
-        public Task UpdateTrainAsync(int id, Trains train, IFormFile? formFile);
+        public Task<ResponseData<Trains>> UpdateTrainAsync(int id, Trains train, IFormFile? formFile);
         
         /// <summary> 
         /// Object Removing 
         /// </summary> 
         /// <param name="id"></param> 
         /// <returns></returns> 
-        public Task DeleteTrainAsync(int id);
+        public Task<ResponseData<bool>> DeleteTrainAsync(int id);
 
         /// <summary> 
         /// Object Creation 

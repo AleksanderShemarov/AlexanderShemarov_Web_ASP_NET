@@ -1,0 +1,84 @@
+﻿@page
+@model AlexanderShemarov.UI.Areas.Admin.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">
+        <i class="bi bi-plus"></i> Create New
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Trains[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trains[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trains[0].Speed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trains[0].Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trains[0].Image)
+            </th>
+            <th>
+                Train's Type
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Trains) {
+        <tr>
+            <td width="150">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+                <td width="330" style="text-align: justify; text-indent: 25px">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Speed) км/г
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @{
+                    var imageUrl = item.Image?.StartsWith("/images/") == true
+                        ? "https://localhost:7002" + item.Image
+                        : item.Image;
+                }
+                <img src="@imageUrl" class="img-thumbnail" width="300" height="150" />
+            </td>
+            <td>
+                @Model.TrainTypes.FirstOrDefault(tt => tt.ID == item.TrainTypesId)?.Name
+            </td>
+            <td class="d-flex justify-content-center flex-column gap-2">
+                <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-success">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-info ms-1 me-1">
+                    <i class="bi bi-info"></i> Details
+                </a>
+                <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> Delete
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<pager admin="true"
+    current-page="@Model.CurrentPage"
+    total-pages="@Model.TotalPages"
+></pager>
