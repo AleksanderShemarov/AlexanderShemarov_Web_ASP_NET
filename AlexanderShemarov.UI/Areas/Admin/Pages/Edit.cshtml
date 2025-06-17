@@ -48,9 +48,20 @@
                 <label>Current Image</label>
                 @if (!string.IsNullOrEmpty(Model.Trains.Image))
                 {
-                    var imageUrl = Model.Trains.Image?.StartsWith("/images/") == true
-                    ? "https://localhost:7002" + Model.Trains.Image
-                    : Model.Trains.Image;
+                    var imageUrl = Model.Trains.Image;
+
+                    if (!string.IsNullOrEmpty(imageUrl))
+                    {
+                        if (imageUrl.StartsWith("/images"))
+                        {
+                            imageUrl = "http://localhost:5002" + imageUrl;
+                        }
+
+                        else if (imageUrl.Contains("localhost:7002"))
+                        {
+                            imageUrl = imageUrl.Replace("https://localhost:7002", "http://localhost:5002");
+                        }
+                    }
                     
                     <img src="@imageUrl" class="img-thumbnail mb-2" style="max-height: 200px" />
                 }

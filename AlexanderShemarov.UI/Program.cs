@@ -1,8 +1,10 @@
 using AlexanderShemarov.UI.Data;
+using AlexanderShemarov.UI.Middleware;
 using AlexanderShemarov.UI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Security.Claims;
 
 
@@ -47,6 +49,17 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllersWithViews();
 
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -61,9 +74,11 @@ else
     app.UseHsts();
 }
 
+app.UseFileLogger();// FileLogger class registration
+
 //app.UseHttpsRedirection();// It is for SSL Sertificate
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();

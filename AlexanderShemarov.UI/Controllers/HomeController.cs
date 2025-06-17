@@ -1,6 +1,7 @@
 using AlexanderShemarov.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Serilog;
 using System.Diagnostics;
 
 
@@ -33,7 +34,9 @@ namespace AlexanderShemarov.UI.Controllers
 
         public IActionResult Index()
         {
-            ViewData["text"] = "Лабораторная работа №7";
+            //Log.Information("Hello from Index method of HomeController.cs");
+
+            ViewData["text"] = "Лабораторная работа №8";
             ViewData["list"] = listElems;
             //ViewData["select"] = _SelectList;
 

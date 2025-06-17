@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AlexanderShemarov.Domain.Entities;
+using AlexanderShemarov.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace AlexanderShemarov.UI.Components
@@ -7,7 +9,8 @@ namespace AlexanderShemarov.UI.Components
     {
         public IViewComponentResult Invoke()
         {
-            return View();
+            var cart = HttpContext.Session.Get<Cart>("cart");
+            return View(cart);
         }
 
     }

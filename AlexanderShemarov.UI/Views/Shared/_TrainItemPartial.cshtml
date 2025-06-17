@@ -6,7 +6,23 @@
 
 <div class="col-4 p-4">
     <div class="card border-dark m-2 h-100">
-        <img src="@Model.Image" alt="Image not found" height="250" />
+        @{
+            var imageUrl = Model.Image;
+
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                if (imageUrl.StartsWith("/images"))
+                {
+                    imageUrl = "http://localhost:5002" + imageUrl;
+                }
+
+                else if (imageUrl.Contains("localhost:7002"))
+                {
+                    imageUrl = imageUrl.Replace("https://localhost:7002", "http://localhost:5002");
+                }
+            }
+        }
+        <img src="@imageUrl" alt="Image not found" height="250" />
         <div class="card-body">
             <h5 class="card-title">
                 @Model.Name

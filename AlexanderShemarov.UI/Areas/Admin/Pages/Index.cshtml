@@ -53,9 +53,20 @@
             </td>
             <td>
                 @{
-                    var imageUrl = item.Image?.StartsWith("/images/") == true
-                        ? "https://localhost:7002" + item.Image
-                        : item.Image;
+                    var imageUrl = item.Image;
+
+                    if (!string.IsNullOrEmpty(imageUrl))
+                    {
+                        if (imageUrl.StartsWith("/images"))
+                        {
+                            imageUrl = "http://localhost:5002" + imageUrl;
+                        }
+
+                        else if (imageUrl.Contains("localhost:7002"))
+                        {
+                            imageUrl = imageUrl.Replace("https://localhost:7002", "http://localhost:5002");
+                        }
+                    }
                 }
                 <img src="@imageUrl" class="img-thumbnail" width="300" height="150" />
             </td>
