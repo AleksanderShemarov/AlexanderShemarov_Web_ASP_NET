@@ -1,0 +1,36 @@
+﻿@if (Train != null)
+{
+    <div class="card mt-5" style="width: 18rem;">
+        <h4>Апісанне Цягніку</h4>
+        @{
+            var imageUrl = Train.Image;
+
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                if (imageUrl.StartsWith("/images"))
+                {
+                    imageUrl = "http://localhost:5002" + imageUrl;
+                }
+
+                else if (imageUrl.Contains("localhost:7002"))
+                {
+                    imageUrl = imageUrl.Replace("https://localhost:7002", "http://localhost:5002");
+                }
+            }
+        }
+        <img src="@imageUrl" class="card-img-top" alt="Page Not Found">
+        <div class="card-body">
+            <h5 class="card-title">@Train.Name</h5>
+            <p class="card-text">@Train.Description</p>
+            <h4 class="badge bg-info">$@Train.Cost</h4>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public Trains Train { get; set; }
+    [Parameter]
+    public EventCallback<Trains> TrainChanged { get; set; }
+}

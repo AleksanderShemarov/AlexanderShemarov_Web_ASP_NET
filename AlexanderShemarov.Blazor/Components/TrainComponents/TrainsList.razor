@@ -1,0 +1,49 @@
+﻿@implements IDisposable
+@rendermode InteractiveServer
+
+
+<h3>Спіс Цягнікоў</h3>
+@if (TrainService.Trains != null && TrainService.Trains.Count() != 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <th>Назва</th>
+            <th></th>
+            @foreach (var item in TrainService.Trains)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        <button class="btn btn-outline-dark" @onclick="@(()=>OnTrainSelected(item.ID))">
+                            Падрабязна
+                        </button>
+                    </td>
+                </tr>
+            }
+        </thead>
+    </table>
+}
+
+
+@code {
+    [CascadingParameter]
+    public ITrainService<Trains> TrainService { get; set; }
+
+    [Parameter]
+    public EventCallback<int> TrainSelected { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        TrainService.ListChanged += StateHasChanged;
+    }
+
+    public async void OnTrainSelected(int id)
+    {
+        await TrainSelected.InvokeAsync(id);
+    }
+
+    public void Dispose()
+    {
+        TrainService.ListChanged -= StateHasChanged;
+    }
+}

@@ -1,0 +1,30 @@
+﻿@page "/trains"
+@using AlexanderShemarov.Domain.Entities
+@using DomainTrains = AlexanderShemarov.Domain.Entities.Trains
+@rendermode InteractiveServer
+
+
+@* <h3>Цягнікі</h3>*@
+<CascadingValue Value="TrainService">
+    <TrainsList TrainSelected="ShowDetails" />
+    <TrainDetails Train="SelectedTrain" />
+    <Pager />
+</CascadingValue>
+
+
+@code {
+    [Inject] ITrainService<DomainTrains> TrainService { get; set; }
+
+    [Parameter]
+    public DomainTrains SelectedTrain { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await TrainService.GetTrains();
+    }
+
+    void ShowDetails(int id)
+    {
+        SelectedTrain = TrainService.Trains.First(train => train.ID == id);
+    }
+}

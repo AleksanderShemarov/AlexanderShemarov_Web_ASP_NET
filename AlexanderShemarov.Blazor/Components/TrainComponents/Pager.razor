@@ -1,0 +1,59 @@
+﻿@implements IDisposable
+@rendermode InteractiveServer
+
+
+<div class="btn-group" role="group" aria-label="Pager">
+    <button type="button" class="btn btn-outline-primary
+        @(previousEnabled ? "" : "disabled")"
+        @onclick="@(e=>OnPageSelected(TrainService.CurrentPage-1))"
+    >
+        <span aria-hidden="true">&laquo;</span>
+    </button>
+
+    @for (int i = 1; i <= TrainService.TotalPages; i++)
+    {
+        var temp = i;
+        <button type="button" class="btn btn-outline-primary
+            @(IsActive(temp) ? "active" : "")"
+            @onclick="@(e=>OnPageSelected(temp))"
+        >
+            @temp
+        </button>
+    }
+
+    <button type="button" class="btn btn-outline-primary
+        @(nextEnabled ? "" : "disabled")"
+        @onclick="@(e=>OnPageSelected(TrainService.CurrentPage+1))"
+    >
+        <span aria-hidden="true">&raquo;</span>
+    </button>
+</div>
+
+
+@code {
+    [CascadingParameter]
+    public ITrainService<Trains> TrainService { get; set; }
+
+    protected override void OnInitialized()
+    {
+        TrainService.ListChanged += StateHasChanged;
+    }
+
+
+    bool previousEnabled { get => TrainService.CurrentPage != 1; }
+
+    bool nextEnabled { get => TrainService.CurrentPage != TrainService.TotalPages; }
+
+    bool IsActive(int pageNo) => pageNo == TrainService.CurrentPage;
+
+
+    async void OnPageSelected(int pageNo)
+    {
+        await TrainService.GetTrains(pageNo);
+    }
+
+    public void Dispose()
+    {
+        TrainService.ListChanged -= StateHasChanged;
+    }
+}
